@@ -21,7 +21,7 @@ ap.add_argument("-t", "--threshold", type=float, default=0.3,
 	help="threshold when applyong non-maxima suppression")
 args = vars(ap.parse_args())
 
-labelsPath = os.path.sep.join([args["yolo"], "coco.names"])
+labelsPath = os.path.sep.join([args["yolo"], "obj.names"])
 # os.path.sep == '/', 현재 디렉토리를 구분하는 구분자
 # yolo의 디렉토리에서 coco.names라는 파일을 구분자 '/'로 합친다.
 LABELS = open(labelsPath).read().strip().split("\n")
@@ -30,8 +30,8 @@ np.random.seed(42)
 COLORS = np.random.randint(0, 255, size=(len(LABELS), 3),
 	dtype="uint8")
 
-weightsPath = os.path.sep.join([args["yolo"], "yolov3.weights"])
-configPath = os.path.sep.join([args["yolo"], "yolov3.cfg"])
+weightsPath = os.path.sep.join([args["yolo"], "yolo-obj_last.weights"])
+configPath = os.path.sep.join([args["yolo"], "yolo-obj.cfg"])
 
 print("[INFO] loading YOLO from disk...")
 net = cv2.dnn.readNetFromDarknet(configPath, weightsPath)
